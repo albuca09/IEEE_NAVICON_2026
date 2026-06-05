@@ -1,3 +1,374 @@
+# TSMS-Drone Multimodal Fusion Pipeline
+
+A complete experimental pipeline for the **Time-Synchronized Multi-Sensor Drone Dataset (TSMS-Drone)**, designed for multimodal drone detection and characterization using synchronized **CW Radar**, **FMCW Radar**, and **RF Receiver** data.
+
+This project transforms the raw TSMS-Drone dataset into an organized, auditable, and experiment-ready structure. It includes automatic dataset download, compressed-file inspection, extraction, directory standardization, integrity validation, exploratory data analysis, benchmark evaluation, and a proposed multimodal fusion architecture based on attention and reliability-aware sensor gating.
+
+---
+
+## Overview
+
+The main goal of this project is to support rigorous experiments with synchronized multi-sensor drone data. The pipeline handles the full workflow from raw dataset preparation to publication-ready results.
+
+It supports:
+
+* Automatic download of TSMS-Drone files from Figshare.
+* Inspection and extraction of compressed files.
+* Standardization of the dataset directory tree.
+* Integrity validation of `.mat` files.
+* Detection of missing, inconsistent, or transposed sensor files.
+* Exploratory data analysis for scientific reporting.
+* Classical benchmark evaluation.
+* Multimodal deep learning with CW Radar, FMCW Radar, and RF Receiver data.
+* Experimental-rigor audits, including leakage detection, duplicate checks, and statistical testing.
+
+---
+
+## Dataset
+
+This project is built around the **Time-Synchronized Multi-Sensor Drone Dataset (TSMS-Drone)**.
+
+The dataset contains synchronized measurements from multiple sensing modalities:
+
+* **CW Radar**
+* **FMCW Radar**
+* **RF Receiver**
+
+These modalities enable the evaluation of single-sensor, dual-sensor, and full multimodal fusion strategies for drone-related tasks.
+
+---
+
+## Main Objectives
+
+The pipeline was designed to:
+
+1. Convert the raw TSMS-Drone dataset into a clean and standardized structure.
+2. Verify data integrity across sensors, targets, distances, and experimental conditions.
+3. Generate exploratory tables and figures suitable for scientific publication.
+4. Evaluate classical machine-learning and deep-learning benchmarks.
+5. Implement a multimodal fusion model with attention, reliability gating, and sensor dropout.
+6. Support rigorous experimental protocols such as open-set evaluation, leave-one-distance-out validation, and leakage analysis.
+
+---
+
+## Pipeline Stages
+
+### 1. Dataset Download
+
+The pipeline starts by automatically downloading the required files from Figshare.
+
+This stage ensures that the raw data can be reproduced from the original public source.
+
+### 2. File Inspection and Extraction
+
+Compressed files are inspected before extraction. The pipeline verifies file names, folder structures, and expected contents.
+
+### 3. Directory Standardization
+
+The raw dataset is reorganized into a consistent and reproducible directory tree, making it easier to run experiments and track samples across modalities.
+
+### 4. Data Integrity Validation
+
+The validation stage checks:
+
+* Expected number of files per condition.
+* Internal variables inside `.mat` files.
+* Shape consistency.
+* Missing files.
+* Corrupted or unreadable files.
+* FMCW files with transposed dimensions.
+
+When corrections are applied, backup files are generated automatically.
+
+### 5. Exploratory Data Analysis
+
+The project generates publication-oriented exploratory analysis outputs, including:
+
+* CSV tables.
+* Markdown tables.
+* LaTeX tables.
+* Dataset summaries.
+* Sensor availability statistics.
+* Class and distance distributions.
+
+These outputs can be used directly in technical reports, dissertations, or scientific papers.
+
+### 6. Benchmark Evaluation
+
+The pipeline evaluates baseline models for multiple tasks, including:
+
+* Target classification.
+* Drone/non-drone detection.
+* Drone model identification.
+* Distance estimation.
+
+These benchmarks provide reference performance for comparison with multimodal fusion models.
+
+### 7. Proposed Multimodal Fusion Model
+
+The project includes a multimodal architecture based on:
+
+* Sensor-specific encoders.
+* Cross-modal self-attention.
+* Reliability gating.
+* Sensor dropout.
+* Auxiliary prediction head.
+
+The model supports different sensor configurations:
+
+* CW Radar only.
+* FMCW Radar only.
+* RF Receiver only.
+* CW + FMCW.
+* CW + RF.
+* FMCW + RF.
+* CW + FMCW + RF.
+
+This allows a systematic comparison between isolated sensors, sensor pairs, and complete multimodal fusion.
+
+---
+
+## Experimental Rigor
+
+The pipeline includes several procedures to improve experimental reliability:
+
+* Split-leakage checking.
+* Hash-based duplicate detection.
+* Near-repetition analysis.
+* Leave-one-distance-out protocols.
+* Distance-bin-based splitting.
+* Open-set evaluation.
+* Leave-target-out evaluation.
+* Bootstrap confidence intervals.
+* McNemar statistical tests.
+* Calibration analysis.
+* Risk-coverage curves.
+
+These procedures help ensure that the reported performance reflects true generalization rather than data leakage or repeated samples.
+
+---
+
+## Recommended Repository Structure
+
+```text
+TSMS-Drone-Fusion/
+│
+├── data/
+│   ├── raw/
+│   ├── extracted/
+│   ├── standardized/
+│   └── processed/
+│
+├── notebooks/
+│   └── figure_fusion_drone.ipynb
+│
+├── outputs/
+│   ├── tables/
+│   ├── figures/
+│   ├── logs/
+│   └── checkpoints/
+│
+├── src/
+│   ├── download.py
+│   ├── prepare_dataset.py
+│   ├── validate_dataset.py
+│   ├── eda.py
+│   ├── benchmarks.py
+│   ├── models.py
+│   ├── train.py
+│   └── evaluate.py
+│
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/TSMS-Drone-Fusion.git
+cd TSMS-Drone-Fusion
+```
+
+Create a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+Activate the environment:
+
+On Linux/macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+On Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Suggested Requirements
+
+```text
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+scikit-learn
+torch
+torchvision
+tqdm
+h5py
+joblib
+requests
+```
+
+Depending on the notebook version, additional packages may be required for statistical testing, advanced visualization, or deep-learning utilities.
+
+---
+
+## Usage
+
+### Run the Notebook
+
+The main experimental workflow is available in:
+
+```text
+notebooks/figure_fusion_drone.ipynb
+```
+
+Launch Jupyter Notebook or JupyterLab:
+
+```bash
+jupyter notebook
+```
+
+or:
+
+```bash
+jupyter lab
+```
+
+Then open the notebook and execute the cells sequentially.
+
+---
+
+## Main Outputs
+
+The pipeline produces several outputs, including:
+
+* Cleaned and standardized dataset folders.
+* Integrity-validation reports.
+* Dataset summary tables.
+* Exploratory data analysis figures.
+* Benchmark metrics.
+* Multimodal fusion metrics.
+* Statistical comparison results.
+* Calibration and risk-coverage plots.
+* Publication-ready CSV, Markdown, and LaTeX tables.
+
+---
+
+## Supported Tasks
+
+The project supports experiments for:
+
+* Drone detection.
+* Drone/non-drone classification.
+* Drone model identification.
+* Target classification.
+* Distance estimation.
+* Sensor-ablation studies.
+* Multimodal fusion evaluation.
+* Open-set and leave-target-out protocols.
+
+---
+
+## Model Description
+
+The proposed model follows a multimodal fusion strategy. Each sensor modality is first processed by a dedicated encoder. The resulting embeddings are then combined through a cross-modal attention mechanism.
+
+A reliability-gating module estimates the contribution of each sensor, allowing the network to reduce the influence of noisy or less informative modalities. Sensor dropout is used during training to improve robustness when one or more sensors are unavailable or degraded.
+
+The architecture also includes an auxiliary prediction head to encourage each modality to learn discriminative representations before fusion.
+
+---
+
+## Scientific Use
+
+This project is suitable for:
+
+* Technical reports.
+* Master’s and doctoral dissertations.
+* IEEE-style conference or journal papers.
+* Comparative studies on multimodal sensing.
+* Drone detection and characterization research.
+* Radar-RF fusion experiments.
+* Robustness and generalization studies.
+
+---
+
+## Reproducibility
+
+The pipeline emphasizes reproducibility by including:
+
+* Standardized data preparation.
+* Explicit dataset validation.
+* Fixed experimental splits.
+* Backup generation before file correction.
+* Exported tables and figures.
+* Statistical evaluation procedures.
+* Multiple fusion and ablation configurations.
+
+---
+
+## Citation
+
+When using this project, please cite the original TSMS-Drone dataset and any related publications associated with it.
+
+A suggested project citation format is:
+
+```bibtex
+@misc{tsms_drone_fusion_pipeline,
+  title        = {TSMS-Drone Multimodal Fusion Pipeline},
+  author       = {Your Name},
+  year         = {2026},
+  note         = {Experimental pipeline for multimodal drone detection and characterization using CW Radar, FMCW Radar, and RF Receiver data}
+}
+```
+
+---
+
+## License
+
+Specify the license according to your intended use.
+
+Example:
+
+```text
+MIT License
+```
+
+---
+
+## Project Status
+
+This project is under active development and is intended for experimental research on multimodal drone sensing, sensor fusion, and robust target characterization.
 
 # TSMS-Drone Multisensor Fusion
 
